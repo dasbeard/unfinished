@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+    {%load static %}
+    <link rel="stylesheet" href="{% static 'wishlist/css/styles.css' %}">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Hello {{user.first_name}}</h1>
+      <header>
+        <a href="{% url 'users:signout' %}">Logout</a>
+      </header>
+      <h2>Your Wish List:</h2>
+      <div class="myList">
+        <table>
+          <thead>
+            <th>Item</th>
+            <th>Added By</th>
+            <th>Date Added</th>
+            <th>Action</th>
+          </thead>
+          <tbody>
+
+            {% for val in wishlist %}
+            <tr>
+              <td><a href="{% url 'wishlist:wishlist' id=val.id %}"> {{val.name}} </a></td>
+              <td>{{user.first_name}}</td>
+              <td>{{val.created_at}}</td>
+              <td><a href="{% url 'wishlist:remove' id=val.id %}">Remove from my List</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div> <!-- End my List -->
+      <h2>Other User's Wish List:</h2>
+      <div class="otherList">
+        <table>
+          <thead>
+            <th>Item</th>
+            <th>Added By</th>
+            <th>Date Added</th>
+            <th>Action</th>
+          </thead>
+          <tbody>
+            {% for val in wishlist %}
+            <tr>
+              <td><a href="{% url 'wishlist:wishlist' id=val.id %}"> {{val.name}} </a></td>
+              <td>{{user.first_name}}</td>
+              <td>{{val.created_at}}</td>
+              <td><a href="{% url 'wishlist:remove' id=val.id %}">Remove from my List</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div> <!-- End Others List -->
+      <footer><a href="{% url 'wishlist:add_item' id=user.id %}">Add item</a></footer>
+    </div>
+  </body>
+</html>

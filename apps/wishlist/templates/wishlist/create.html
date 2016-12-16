@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add an Item to your Wishlist</title>
+    {%load static %}
+    <link rel="stylesheet" href="{% static 'wishlist/css/styles.css' %}">
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="{% url 'wishlist:index' %}">Home</a><a href="{% url 'users:signout' %}">Logout</a>
+      </header>
+      <h1>Create a New Wishlist Item {{user.first_name}}</h1>
+    </div>
+    <form class="" action="{% url 'wishlist:create' %}" method="POST">
+      <label>Item/Product</label><input type="text" name="product">
+      <input type="submit" value="Add">
+      {% csrf_token %}
+    </form>
+
+
+  </body>
+</html>

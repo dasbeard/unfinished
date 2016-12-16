@@ -1,0 +1,19 @@
+*{
+  background-color: silver;
+}
+
+header{
+  text-align: right;
+  margin: 10px;
+}
+  header a{
+    margin-right: 15px;
+  }
+
+
+footer{
+  text-align: right;
+  margin: 10px;
+  margin-right: 50px;
+
+}
