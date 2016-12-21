@@ -13,7 +13,16 @@
       </header>
       <h1>Create a New Wishlist Item {{user.first_name}}</h1>
     </div>
-    <form class="" action="{% url 'wishlist:create' %}" method="POST">
+    
+    {% if messages %}
+      <ul class="messages">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+    {% endif %}
+
+    <form action="{% url 'wishlist:create' %}" method="POST">
       <label>Item/Product</label><input type="text" name="product">
       <input type="submit" value="Add">
       {% csrf_token %}

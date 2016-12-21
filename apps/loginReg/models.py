@@ -50,7 +50,7 @@ class Users(models.Model):
     last_name = models.CharField(max_length=45)
     username = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
-
+    hiredate = models.DateTimeField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()

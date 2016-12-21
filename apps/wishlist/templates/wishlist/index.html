@@ -23,14 +23,23 @@
           </thead>
           <tbody>
 
-            {% for val in wishlist %}
+            {% for val in myList %}
             <tr>
               <td><a href="{% url 'wishlist:wishlist' id=val.id %}"> {{val.name}} </a></td>
-              <td>{{user.first_name}}</td>
+              <td>{{val.user.first_name}}</td>
               <td>{{val.created_at}}</td>
-              <td><a href="{% url 'wishlist:remove' id=val.id %}">Remove from my List</a></td>
+              <td>
+                {% if user.id == val.user.id %}
+                <a href="{% url 'wishlist:delete' id=val.id %}">Delete Item</a>
+                {% else %}
+                <a href="{% url 'wishlist:remove' id=val.id%}"> Remove from my list </a>
+                {% endif %}
+
+
+              </td>
             </tr>
             {% endfor %}
+
           </tbody>
         </table>
       </div> <!-- End my List -->
@@ -44,16 +53,21 @@
             <th>Action</th>
           </thead>
           <tbody>
-            {% for val in wishlist %}
+            {% for val in othersList %}
             <tr>
               <td><a href="{% url 'wishlist:wishlist' id=val.id %}"> {{val.name}} </a></td>
-              <td>{{user.first_name}}</td>
+
+              <td>{{val.user.first_name}}</td>
+
               <td>{{val.created_at}}</td>
-              <td><a href="{% url 'wishlist:remove' id=val.id %}">Remove from my List</a></td>
+              <td><a href="{% url 'wishlist:add_wish' id=val.id %}">Add to my list</a></td>
             </tr>
             {% endfor %}
           </tbody>
         </table>
+
+
+
       </div> <!-- End Others List -->
       <footer><a href="{% url 'wishlist:add_item' id=user.id %}">Add item</a></footer>
     </div>

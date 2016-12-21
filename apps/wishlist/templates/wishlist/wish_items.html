@@ -12,13 +12,21 @@
         <a href="{% url 'wishlist:index' %}">Home</a><a href="{% url 'users:signout' %}">Logout</a>
       </header>
       <h1> {{item.name}} </h1>
-      <h3>Users who added this product/item under their wish list:</h3>
+      <h3>Other users who added this item to their wish list:</h3>
+      {% if user.id == item.user.id %}
+      <a href="{% url 'wishlist:delete' id=item.id %}">Delete Item</a>
+      {% else %}
+      <a href="{% url 'wishlist:remove' id=item.id%}"> Remove from my list </a>
+      {% endif %}
 
-      {% for val in wishlist %}
-      <tr>
-        <td><a href="{% url 'wishlist:wishlist' id=val.id %}"> {{val.name}} </a></td>
-        <td>{{val.created_at}}</td>
-        <td><a href="{% url 'wishlist:remove' id=val.id %}">Remove from my List</a></td>
+
+      {% for review in item.wish.all %}
+        {% if user.id != review.id %}
+        <!-- <p>{{val.created_at}}</p> -->
+        <p>{{review.first_name}}</p>
+        {% endif %}
+
+
       {% endfor %}
 
     </div>
